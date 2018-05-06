@@ -1,13 +1,9 @@
-# With TP and SL, limited trades, only 1 open position
-
-
 from __future__ import absolute_import
 import logging
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import numpy as np
 from Environment.core import Env
-from tgym.utils import calc_spread
 
 np.random.seed(0)
 
@@ -20,7 +16,7 @@ mpl.rcParams.update(
         "lines.markersize": 8
     }
 )
-logging.basicConfig(filename='dqn.log', level=logging.INFO)
+logging.basicConfig(filename='double_duelling.log', level=logging.INFO)
 # create logger
 logger = logging.getLogger('tx')
 logger.setLevel(logging.INFO)

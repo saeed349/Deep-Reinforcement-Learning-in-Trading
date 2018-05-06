@@ -104,7 +104,8 @@ class DDDQNAgent(Agent):
         self.i = (self.i + 1) % self.memory_size
         self.memory[self.i] = (state, action, reward, next_state, done)
         if (self.i == self.memory_size - 1):
-            print("Memory Refilled")
+            # print("Memory Refilled")
+            pass
         if (not warming_up) and (self.i % self.train_interval) == 0:
             if self.epsilon > self.epsilon_min:
                 self.epsilon -= self.epsilon_decrement

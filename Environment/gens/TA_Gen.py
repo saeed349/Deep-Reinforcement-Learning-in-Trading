@@ -1,5 +1,4 @@
 import csv
-
 import numpy as np
 from Environment.core import DataGenerator
 import pandas as pd
@@ -15,14 +14,11 @@ class TAStreamer(DataGenerator):
         header (bool): True if the file has got a header, False otherwise
     """
     @staticmethod
-    def _generator(filename, header=False, split=0.8, mode='train'):
-        # df=pandas.read_csv(filename)
-        # df.columns=['Low','High']
-        # df['Close']=(df.Low+df.High)/2
-        # _stock = Sdf.retype(df.copy())
-        spread = .005
+    def _generator(filename, header=False, split=0.8, mode='train',spread=.005):
         df = pd.read_csv(filename)
-        _stock = Sdf.retype(df)
+        if "Name" in df:
+            df.drop('Name',axis=1,inplace=True)
+        _stock = Sdf.retype(df.copy())
         _stock.get('cci_14')
         _stock.get('rsi_14')
         _stock.get('dx_14')
@@ -43,8 +39,6 @@ class TAStreamer(DataGenerator):
         else:
             raw_data = df_normalized[['ask', 'bid', 'mid', 'rsi_14', 'cci_14','dx_14']].iloc[split_len:,:]
 
-        # raw_data =  raw_data.dropna(how='any')
-        #_stock.to_csv('./Data/GOOGIND.csv',encoding='utf-8', index=False,)
         for index, row in raw_data.iterrows():
             yield row.as_matrix()
 
