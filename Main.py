@@ -74,6 +74,7 @@ def World(filename=None,
     val_loss_list=[]
     reward_list=[]
     epsilon_list=[]
+    metrics_df=None
     if train_test == "train":
         best_loss = 9999
         best_reward = 0
@@ -171,5 +172,5 @@ def World(filename=None,
 
 
 if __name__ == "__main__":
-    World(filename = r'./Data/AAPL_data.csv')
+    World(filename = r'./Data/ADM_data.csv',save_results=True, episodes=10, display=True,  train_test='train')
     # World()

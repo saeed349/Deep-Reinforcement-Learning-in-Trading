@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from Environment.core import Env
 
-np.random.seed(0)
+# np.random.seed(0)
 
 plt.style.use('dark_background')
 mpl.rcParams.update(

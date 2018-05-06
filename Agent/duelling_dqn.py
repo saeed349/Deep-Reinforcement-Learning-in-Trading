@@ -51,6 +51,7 @@ class DDDQNAgent(Agent):
         self.train_test = train_test
         self.symbol=symbol
 
+
     def save_model(self):
         self.brain.save(r'./Saved Models/'+self.symbol+'.h5')
 
