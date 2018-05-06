@@ -53,8 +53,8 @@ def reward_vis(df, mean=True, N=10):
         y1 = df.reward
         
     trace0 = Scatter(
-    x = train_metrics.index[N-1:],
-    y = np.convolve(train_metrics.reward, np.ones((N,))/N, mode='valid'),
+    x = df.index[N-1:],
+    y = np.convolve(df.reward, np.ones((N,))/N, mode='valid'),
     name = 'Reward',
     line = dict(
         color = ('rgb(205, 12, 24)'),

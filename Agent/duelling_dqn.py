@@ -29,7 +29,8 @@ class DDDQNAgent(Agent):
                  learning_rate=0.001,
                  batch_size=64,
                  epsilon_min=0.01,
-                 train_test='train'
+                 train_test='train',
+                 symbol=""
                  ):
         self.state_size = state_size
         self.action_size = action_size
@@ -48,12 +49,13 @@ class DDDQNAgent(Agent):
         self.brain_ = self._build_brain()
         self.i = 0
         self.train_test = train_test
+        self.symbol=symbol
 
     def save_model(self):
-        self.brain.save('DQN_Agent.h5')
+        self.brain.save(r'./Saved Models/'+self.symbol+'.h5')
 
     def load_model(self):
-        self.brain = load_model('DQN_Agent.h5')
+        self.brain = load_model(r'./Saved Models/'+self.symbol+'.h5')
 
     def _build_brain(self):
         """Build the agent's brain

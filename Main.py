@@ -3,6 +3,7 @@ import os
 import random
 import numpy as np
 import time
+import re
 
 from Environment.gens.TA_Gen import TAStreamer
 from Environment.envs.indicator_1 import Indicator_1
@@ -27,8 +28,6 @@ def World(filename=None,
 ):
     start = time.time()
 
-    if(not filename):
-        filename = r'./Data/XOM_OHLC.csv'
     generator = TAStreamer(filename=filename, mode='train', split=train_test_split)
     episode_length = round(int(len(pd.read_csv(filename))*train_test_split), -1)
 
@@ -43,6 +42,11 @@ def World(filename=None,
     state_size = len(state)
 
 
+    try:
+        symbol = re.findall(r'Data\\([^_]+)',filename)[0]
+    except:
+        symbol = ""
+
     agent = DDDQNAgent(state_size=state_size,
                      action_size=action_size,
                      memory_size=memory_size,
@@ -53,7 +57,8 @@ def World(filename=None,
                      learning_rate=learning_rate,
                      batch_size=batch_size,
                      epsilon_min=epsilon_min,
-                     train_test=train_test)
+                     train_test=train_test,
+                     symbol=symbol)
 
     # Warming up the agent
     if (train_test == 'train'):
@@ -103,7 +108,7 @@ def World(filename=None,
             reward_list.append(rew)
             epsilon_list.append(round(agent.epsilon, 2))
 
-        # agent.save_model()
+        agent.save_model()
 
         metrics_df=pd.DataFrame({'loss':loss_list,'val_loss':val_loss_list,'reward':reward_list,'epsilon':epsilon_list})
 
