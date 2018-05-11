@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0204eeca-9de1-4a10-ad9b-ae92d5b49128" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/.ipynb_checkpoints/Results-checkpoint.ipynb" afterPath="$PROJECT_DIR$/.ipynb_checkpoints/Results-checkpoint.ipynb" />
-      <change beforePath="$PROJECT_DIR$/Agent/duelling_dqn.py" afterPath="$PROJECT_DIR$/Agent/duelling_dqn.py" />
-      <change beforePath="$PROJECT_DIR$/Main.py" afterPath="$PROJECT_DIR$/Main.py" />
-      <change beforePath="$PROJECT_DIR$/Results.ipynb" afterPath="$PROJECT_DIR$/Results.ipynb" />
-    </list>
+    <list default="true" id="0204eeca-9de1-4a10-ad9b-ae92d5b49128" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,11 +11,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="duelling_dqn.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="duelling_dqn.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Agent/duelling_dqn.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="445">
-              <caret line="80" column="72" lean-forward="false" selection-start-line="80" selection-start-column="72" selection-end-line="80" selection-end-column="72" />
+            <state relative-caret-position="150">
+              <caret line="17" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="151" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="double_dqn.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Agent/double_dqn.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="225">
+              <caret line="41" column="19" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="144" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dqn.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Agent/dqn.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="250">
+              <caret line="21" column="29" lean-forward="true" selection-start-line="21" selection-start-column="29" selection-end-line="21" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -41,6 +55,13 @@
       </file>
     </leaf>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
   <component name="FindInProjectRecents">
     <findStrings>
       <find>memory</find>
@@ -48,6 +69,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/Agent/double_dqn.py" />
+        <option value="$PROJECT_DIR$/Agent/dqn.py" />
+      </list>
+    </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="1911" />
@@ -77,6 +106,11 @@
             <path>
               <item name="reinforcement-learning-in-trading" type="b2602c69:ProjectViewProjectNode" />
               <item name="reinforcement-learning-in-trading" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="reinforcement-learning-in-trading" type="b2602c69:ProjectViewProjectNode" />
+              <item name="reinforcement-learning-in-trading" type="462c0819:PsiDirectoryNode" />
+              <item name="Agent" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -156,8 +190,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Agent/duelling_dqn.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="445">
-          <caret line="80" column="72" lean-forward="false" selection-start-line="80" selection-start-column="72" selection-end-line="80" selection-end-column="72" />
+        <state relative-caret-position="150">
+          <caret line="17" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="151" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Agent/double_dqn.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="41" column="19" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="144" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Agent/dqn.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="21" column="29" lean-forward="true" selection-start-line="21" selection-start-column="29" selection-end-line="21" selection-end-column="29" />
           <folding />
         </state>
       </provider>
