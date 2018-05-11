@@ -56,6 +56,7 @@ class DDDQNAgent(Agent):
         self.brain.save(r'./Saved Models/'+self.symbol+'.h5')
 
     def load_model(self):
+        print(self.symbol, "path=",'./Saved Models/'+self.symbol+'.h5')
         self.brain = load_model(r'./Saved Models/'+self.symbol+'.h5')
 
     def _build_brain(self):
