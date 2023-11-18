@@ -238,70 +238,50 @@ class Indicator_1(Env):
         return trade_details
 
     def render(self, savefig=False, filename='myfig'):
-        """Matlplotlib rendering of each step.
+        """Matplotlib rendering of each step."""
 
-        Args:
-            savefig (bool): Whether to save the figure as an image or not.
-            filename (str): Name of the image file.
-        """
         if self._first_render:
-            self._f, (self._ax, self._ay, self._az, self._at) = plt.subplots(nrows=4, ncols=1, sharex=True, sharey=False, squeeze=True,
-                        gridspec_kw={'height_ratios': [4, 1, 1, 0]},)
-
-
-
-            self._ax = [self._ax]
-            self._ay = [self._ay]
-            self._az = [self._az]
-            self._at = [self._at]
+            # 初始化图表和子图
+            self._f, (self._ax, self._ay, self._az, self._at) = plt.subplots(nrows=4, ncols=1, sharex=True, gridspec_kw={'height_ratios': [4, 1, 1, 0]})
             self._f.set_size_inches(12, 6)
             self._first_render = False
             self._f.canvas.mpl_connect('close_event', self._handle_close)
 
+        # 更新价格、RSI和CCI
+        ask, bid, mid, rsi, cci = self._tick_buy, self._tick_sell, self.tick_mid, self.tick_rsi_14, self.tick_cci_14
+        self._ax.plot([self._iteration, self._iteration + 1], [mid, mid], color='white')
+        self._ay.plot([self._iteration, self._iteration + 1], [cci, cci], color='green')
+        self._az.plot([self._iteration, self._iteration + 1], [rsi, rsi], color='blue')
 
-        #  price
-        ask, bid, mid, rsi, cci = self._tick_buy, self._tick_sell,self.tick_mid, self.tick_rsi_14, self.tick_cci_14
-
-        self._ax[-1].plot([self._iteration, self._iteration + 1], [mid, mid], color='white')
-        self._ay[-1].plot([self._iteration, self._iteration + 1], [cci, cci], color='green')
-        self._az[-1].plot([self._iteration, self._iteration + 1], [rsi, rsi], color='blue')
-        self._ay[0].set_ylabel('CCI')
-        self._az[0].set_ylabel('RSI')
-
-        ymin, ymax = self._ax[-1].get_ylim()
+        # 绘制交易标记
+        ymin, ymax = self._ax.get_ylim()
         yrange = ymax - ymin
-        if self.Sell_render:
-            self._ax[-1].scatter(self._iteration + 0.5, bid + 0.03 *
-                                 yrange, color='orangered', marker='v')
-        elif self.Buy_render:
-            self._ax[-1].scatter(self._iteration + 0.5, ask - 0.03 *
-                                 yrange, color='lawngreen', marker='^')
-        if self.TP_render:
-            self._ax[-1].scatter(self._iteration + 0.5, bid + 0.03 *
-                                 yrange, color='gold', marker='.')
-        elif self.SL_render:
-            self._ax[-1].scatter(self._iteration + 0.5, ask - 0.03 *
-                                 yrange, color='maroon', marker='.')
+        self._plot_trade_markers(ymin, ymax, yrange)
 
+        # 更新图表标题和布局
+        self._update_chart_layout()
 
-        self.TP_render=self.SL_render=False
-        self.Buy_render=self.Sell_render=False
-
-        plt.suptitle('Total Reward: ' + "%.2f" % self._total_reward +
-                     '  Total PnL: ' + "%.2f" % self._total_pnl +
-                     '  Unrealized Return: ' + "%.2f" % (self.unrl_pnl*100)  + "% "+
-                     '  Pstn: ' + ['flat', 'long', 'short'][list(self._position).index(1)] +
-                     '  Action: ' + ['flat', 'long', 'short'][list(self._action).index(1)] +
-                     '  Tick:' + "%.2f" % self._iteration)
-        self._f.tight_layout(pad=0.4, w_pad=0.5, h_pad=1.0)
-
-        plt.xticks(range(self._iteration)[::5])
-        plt.xlim([max(0, self._iteration - 80.5), self._iteration + 0.5])
-
-        plt.subplots_adjust(top=0.85)
-        plt.pause(0.00001) # 0.01
+        # 保存图表
         if savefig:
             plt.savefig(filename)
+
+    def _plot_trade_markers(self, ymin, ymax, yrange):
+        """绘制交易标记。"""
+        marker_y_position = lambda price: price + 0.03 * yrange if self.Sell_render else price - 0.03 * yrange
+        marker_color = 'orangered' if self.Sell_render else 'lawngreen'
+        marker_symbol = 'v' if self.Sell_render else '^'
+        self._ax.scatter(self._iteration + 0.5, marker_y_position(self._tick_sell if self.Sell_render else self._tick_buy), color=marker_color, marker=marker_symbol)
+        self.TP_render = self.SL_render = self.Buy_render = self.Sell_render = False
+
+    def _update_chart_layout(self):
+        """更新图表布局和标题。"""
+        plt.suptitle(f'Total Reward: {self._total_reward:.2f}  Total PnL: {self._total_pnl:.2f}  Unrealized Return: {self.unrl_pnl * 100:.2f}%  Position: {["flat", "long", "short"][list(self._position).index(1)]}  Action: {["flat", "long", "short"][list(self._action).index(1)]}  Tick: {self._iteration:.2f}')
+        self._f.tight_layout(pad=0.4, w_pad=0.5, h_pad=1.0)
+        plt.xticks(range(self._iteration)[::5])
+        plt.xlim([max(0, self._iteration - 80.5), self._iteration + 0.5])
+        plt.subplots_adjust(top=0.85)
+        plt.pause(0.00001)  # 快速更新
+
 
     def _get_observation(self):
         """Concatenate all necessary elements to create the observation.
