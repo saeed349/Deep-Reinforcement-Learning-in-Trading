@@ -83,7 +83,7 @@ class DQNAgent(Agent):
 
             self.optimizer.zero_grad()
             q_values = self.brain(state_batch)
-            actions = torch.LongTensor(action_batch)  # 使用修改后的 action_batch
+            actions = torch.LongTensor(action_batch)  
             q_values = q_values.gather(1, actions.unsqueeze(1)).squeeze(1)
 
             loss = nn.MSELoss()(q_values, target_q_values)
